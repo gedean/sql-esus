@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="S:\lazarus\fpc\3.0.4\bin\x86_64-win64\fpc.exe" Date="1331391477"/>
+  <Params Value=" -MObjFPC -Scghi -Os3 -g -gl -WG -l -vewnhibq -FiD:\projects\sql-esus\extrator_dados\sdk\front_end\lazarus\project\lib\x86_64-win64 -FuD:\projects\sql-esus\extrator_dados\sdk\front_end\lazarus\source\main\form -FuD:\projects\sql-esus\extrator_dados\sdk\front_end\lazarus\source\main\data_module -FuS:\lazarus\lcl\units\x86_64-win64\win32 -FuS:\lazarus\lcl\units\x86_64-win64 -FuS:\lazarus\components\lazutils\lib\x86_64-win64 -FuS:\lazarus\packager\units\x86_64-win64 -FuD:\projects\sql-esus\extrator_dados\sdk\front_end\lazarus\project\ -FUD:\projects\sql-esus\extrator_dados\sdk\front_end\lazarus\project\lib\x86_64-win64\ -FED:\projects\sql-esus\extrator_dados\sdk\front_end\ -oD:\projects\sql-esus\extrator_dados\sdk\front_end\extrator_de_dados_esus.exe -dLCL -dLCLwin32 extrator_dados.lpr"/>
+</CONFIG>
