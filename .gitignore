@@ -2,5 +2,5 @@
 ./extrator_dados/sdk/front_end/lazarus/build/*.txt
 ./extrator_dados/sdk/front_end/lazarus/build/Relatorios/
 ./extrator_dados/sdk/front_end/lazarus/project/backup/
-./extrator_dados/sdk/front_end/lazarus/project/lib/
+extrator_dados/sdk/front_end/lazarus/project/lib/
 
