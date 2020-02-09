@@ -40,7 +40,6 @@ type
     procedure SynEditorSqlChange(Sender: TObject);
     function GetSqlEditorTextLength: Integer;
     function IsSqlEditorEmpty: Boolean;
-
   private
 
   public
@@ -70,15 +69,12 @@ begin
 end;
 
 procedure TApplicationMainForm.ActionExecQueryExecute(Sender: TObject);
-const
-  MESSAGE_TEXT_TEMPLATE : String = 'Executar o Código Abaixo?' + sLineBreak + '%s';
 var
    Query : String;
-   MessageText : String;
+   MessageText : String = 'Deseja realmente executar o código informado?' + sLineBreak + 'Recomenda-se muita atenção para não executar comandos que têm potencial de Deletar ou Modificar informações da Base de Dados';
 begin
-     Query := SynEditorSql.Lines.Text;
-     MessageText := Format(MESSAGE_TEXT_TEMPLATE, [Query]);
-  if MessageDlg('Extrator Dados E-SUS Versão 0.0.1', MessageText, mtConfirmation, [mbNo, mbYes], 0) = mrYes then
+  Query := SynEditorSql.Lines.Text;
+  if MessageDlg(MainDataModule.MESSAGE_TITLE, MessageText, mtConfirmation, [mbNo, mbYes], 0) = mrYes then
     If CheckBoxSaveToFile.Checked then
       MainDataModule.ExecuteQuery(Query, LabeledEditFileName.Text)
     else
@@ -99,7 +95,7 @@ procedure TApplicationMainForm.ActionAboutExecute(Sender: TObject);
 const
   LICENCE : String = 'Licença:';
 begin
-  MessageDlg('Extrator Dados E-SUS Versão 0.0.1', 'Desenvolvolvimento: Gedean Dias (gedean.dias@akapu.com.br)', mtInformation, [mbOK], 0);
+  MessageDlg(MainDataModule.MESSAGE_TITLE, 'Desenvolvolvimento: Gedean Dias (gedean.dias@akapu.com.br)', mtInformation, [mbOK], 0);
 end;
 
 procedure TApplicationMainForm.FormCreate(Sender: TObject);
@@ -115,7 +111,7 @@ begin
   If Not FileExists(MainDataModule.HISTORY_FILE_NAME) then
     begin
      HistoryFile := FileCreate(MainDataModule.HISTORY_FILE_NAME);
-     CloseFile(HistoryFile);
+     FileClose(HistoryFile);
     end;
 
   StatusBar.Panels[0].Text := Format(DATABASE_SERVER_INFO_TEMPLATE, [MainDataModule.DatabaseConnection.HostName, MainDataModule.DatabaseConnection.Params[0].Remove(0, 5)]);

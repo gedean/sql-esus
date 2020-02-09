@@ -5,7 +5,7 @@ unit main_datamodule;
 interface
 
 uses
-  Classes, SysUtils, BufDataset, pqconnection, sqldb, Dialogs, lclintf, db;
+  Classes, SysUtils, BufDataset, pqconnection, sqldb, Dialogs, Controls, lclintf, db;
 
 type
 
@@ -19,11 +19,15 @@ type
 
   public
     const
+    MESSAGE_TITLE : RawByteString = 'Extrator Dados E-SUS Versão 0.0.1';
+
     REPORTS_FOLDER_NAME : RawByteString = 'Relatorios';
     HISTORY_FILE_NAME : RawByteString = './Historico_Consultas.txt';
-
     function GetReportsFolderRelativePath : String;
     function GetReportsFolderFullPath : String;
+
+    function GetHistoryFileFullPath : String;
+
     procedure ExecuteQuery(Query: String);
     procedure ExecuteQuery(Query: String; FileName: String);
     procedure SaveToHistoryFile(aTitle: String; aText: String);
@@ -44,8 +48,19 @@ function TMainDataModule.GetReportsFolderFullPath : string;
 begin
      Result := GetCurrentDir + '\' + REPORTS_FOLDER_NAME;
 end;
+function TMainDataModule.GetHistoryFileFullPath : String;
+var
+  history_filename : string;
+begin
+     history_filename := HISTORY_FILE_NAME;
+     history_filename := history_filename.Replace('./', '');
+     Result := GetCurrentDir + '\' + history_filename;
+end;
 
 procedure TMainDataModule.ExecuteQuery(Query: String);
+var
+  ERROR_MESSAGE_TEMPLATE : String = 'Erro na Execução do Script, deseja abrir aquivo de histórico (%s)?';
+  HISTORY_FILE_ERROR_TEMPLATE : String = '%s' + sLineBreak + '---------------------------' + sLineBreak + 'ERRO:' + sLineBreak + '%s';
 begin
      SQLQuery.SQL.Clear;
      SQLQuery.SQL.AddText(Query);
@@ -53,10 +68,12 @@ begin
        SQLQuery.ExecSQL;
        SaveToHistoryFile('Executado com sucesso', Query);
      except
-       on E: EPQDatabaseError do
+       On E :Exception do
           begin
             SQLTransaction.Rollback;
-            SaveToHistoryFile('Erro na Execução da Consulta', Query);
+            SaveToHistoryFile('Erro na Execução da Consulta', Format(HISTORY_FILE_ERROR_TEMPLATE, [Query, E.Message]));
+            if MessageDlg(MainDataModule.MESSAGE_TITLE, Format(ERROR_MESSAGE_TEMPLATE, [HISTORY_FILE_NAME]), mtError, [mbYes, mbNo], 0) = mrYes then
+               OpenDocument(GetHistoryFileFullPath);
           end;
      end;
 end;
@@ -72,8 +89,12 @@ begin
      ReportFullPath := GetReportsFolderFullPath + '\' + FileName + EXPORT_FILE_EXTENSION;
      Query := Query.Replace(';', '');
      ExportQuery := Format(EXPORT_SQL_TEMPLATE, [Query, ReportFullPath]);
-     ExecuteQuery(ExportQuery);
-     OpenDocument(ReportFullPath)
+     try
+       ExecuteQuery(ExportQuery);
+       OpenDocument(ReportFullPath);
+     except
+       MessageDlg(MainDataModule.MESSAGE_TITLE, 'Erro ao executar o Script. Sem relatórios para exibir', mtError, [mbOK], 0)
+     end;
 end;
 
 procedure TMainDataModule.SaveToHistoryFile(aTitle: String; aText: String);
