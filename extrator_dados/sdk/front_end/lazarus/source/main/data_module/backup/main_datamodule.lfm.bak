@@ -1,11 +1,11 @@
 object MainDataModule: TMainDataModule
   OldCreateOrder = False
-  Height = 420
-  HorizontalOffset = 393
-  VerticalOffset = 300
-  Width = 613
-  PPI = 96
-  object EsusConnection: TPQConnection
+  Height = 630
+  HorizontalOffset = 590
+  VerticalOffset = 344
+  Width = 920
+  PPI = 144
+  object DatabaseConnection: TPQConnection
     Connected = True
     LoginPrompt = False
     DatabaseName = 'esus'
@@ -14,18 +14,19 @@ object MainDataModule: TMainDataModule
       'port=5433'
     )
     Password = 'esus'
+    Transaction = SQLTransaction
     UserName = 'postgres'
+    CharSet = 'LATIN1'
     HostName = 'localhost'
-    left = 236
-    top = 40
+    left = 352
+    top = 60
   end
-  object SQLQuery1: TSQLQuery
+  object SQLQuery: TSQLQuery
     FieldDefs = <>
-    Database = EsusConnection
+    Database = DatabaseConnection
+    Transaction = SQLTransaction
     ReadOnly = True
     SQL.Strings = (
-      'COPY ('
-      ''
       'WITH'
       '    pessoas_duplicadas AS ('
       '     SELECT'
@@ -64,12 +65,16 @@ object MainDataModule: TMainDataModule
       '            docs_pessoas_duplicadas.no_mae = pessoas_duplicadas.no_mae AND'
       '            docs_pessoas_duplicadas.dt_nascimento = pessoas_duplicadas.dt_nascimento'
       'ORDER BY pessoas_duplicadas.no_cidadao'
-      ') TO ''C:\RELATORIOS_ESUS\CADASTRO_CIDADAO_DUPLICADO.csv'' '
-      'DELIMITER '';'''
-      'CSV HEADER'
     )
     Params = <>
-    left = 237
-    top = 205
+    left = 192
+    top = 308
+  end
+  object SQLTransaction: TSQLTransaction
+    Active = True
+    Action = caNone
+    Database = DatabaseConnection
+    left = 548
+    top = 224
   end
 end
