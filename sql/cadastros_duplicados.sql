@@ -13,8 +13,6 @@ INDICANDO POSSÍVEL DUPLICIDADE DE REGIRSTROS NA BASE DE DADOS DO E-SUS
 DO SCRIPT SEM A OCORRENCIA DE ERROS POR TABELA JA EXISTENTE
 --------------------------------------------------------------*/
 
-COPY (
-
 WITH
     pessoas_duplicadas AS (
      SELECT
@@ -52,7 +50,4 @@ FROM
     docs_pessoas_duplicadas ON docs_pessoas_duplicadas.no_cidadao = pessoas_duplicadas.no_cidadao AND
             docs_pessoas_duplicadas.no_mae = pessoas_duplicadas.no_mae AND
             docs_pessoas_duplicadas.dt_nascimento = pessoas_duplicadas.dt_nascimento
-ORDER BY pessoas_duplicadas.no_cidadao
-) TO 'C:\RELATORIOS_ESUS\CADASTRO_CIDADAO_DUPLICADO.csv' 
-DELIMITER ';'
-CSV HEADER
+ORDER BY pessoas_duplicadas.no_cidadao;
