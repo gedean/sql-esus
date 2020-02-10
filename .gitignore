@@ -1,4 +1,5 @@
 /extrator_dados/sdk/front_end/lazarus/build/*.exe
+/extrator_dados/sdk/front_end/lazarus/build/*.zip
 /extrator_dados/sdk/front_end/lazarus/build/*.txt
 /extrator_dados/sdk/front_end/lazarus/build/Relatorios/
 /extrator_dados/sdk/front_end/lazarus/project/lib
