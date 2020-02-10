@@ -74,6 +74,7 @@ begin
             SaveToHistoryFile('Erro na Execução da Consulta', Format(HISTORY_FILE_ERROR_TEMPLATE, [Query, E.Message]));
             if MessageDlg(MainDataModule.MESSAGE_TITLE, Format(ERROR_MESSAGE_TEMPLATE, [HISTORY_FILE_NAME]), mtError, [mbYes, mbNo], 0) = mrYes then
                OpenDocument(GetHistoryFileFullPath);
+            raise;
           end;
      end;
 end;

@@ -919,9 +919,10 @@ object ApplicationMainForm: TApplicationMainForm
     left = 136
     top = 144
     object ActionExecQuery: TAction
-      Caption = 'Executar SQL'
+      Caption = 'Executar SQL (F5)'
       Enabled = False
       OnExecute = ActionExecQueryExecute
+      ShortCut = 116
     end
     object ActionAbout: TAction
       Caption = 'Sobre'

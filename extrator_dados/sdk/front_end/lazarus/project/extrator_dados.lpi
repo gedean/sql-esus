@@ -6,7 +6,7 @@
     <General>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
-      <Title Value="extrator_dados"/>
+      <Title Value="Extrator de Dados E-SUS 0.0.1"/>
       <Scaled Value="True"/>
       <ResourceType Value="res"/>
       <XPManifest>
@@ -61,7 +61,7 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="..\extrator_de_dados_esus"/>
+      <Filename Value="..\build\extrator_de_dados_esus_win_64bits"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>

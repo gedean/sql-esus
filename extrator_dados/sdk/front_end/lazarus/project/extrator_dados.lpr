@@ -11,6 +11,7 @@ uses
 
 begin
   RequireDerivedFormResource:=True;
+  Application.Title:='Extrator de Dados E-SUS 0.0.1';
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainDataModule, MainDataModule);
