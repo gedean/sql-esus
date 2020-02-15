@@ -7,13 +7,15 @@ interface
 uses
   SysUtils, Forms, Controls, Dialogs, StdCtrls, ActnList,
   main_datamodule, lclintf, Menus, ComCtrls, ExtCtrls, Buttons,
-  SynHighlighterSQL, SynEdit;
+  SynHighlighterSQL, SynEdit, Classes;
 
 type
 
   { TApplicationMainForm }
 
   TApplicationMainForm = class(TForm)
+    ActionExtractDatabase: TAction;
+    ActionOpenExtractedBaseFolder: TAction;
     ActionOpenReportsFolder: TAction;
     ActionEditorTests: TAction;
     ActionAbout: TAction;
@@ -24,6 +26,9 @@ type
     MainActionList: TActionList;
     MainMenu: TMainMenu;
     MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
     MenuItemQueries: TMenuItem;
     MenuItemDuplicates: TMenuItem;
     MenuItemSetup: TMenuItem;
@@ -33,7 +38,10 @@ type
     SynEditorSql: TSynEdit;
     SynSQLSyn: TSynSQLSyn;
     procedure ActionAboutExecute(Sender: TObject);
+    procedure ActionEditorTestsExecute(Sender: TObject);
     procedure ActionExecQueryExecute(Sender: TObject);
+    procedure ActionExtractDatabaseExecute(Sender: TObject);
+    procedure ActionOpenExtractedBaseFolderExecute(Sender: TObject);
     procedure ActionOpenReportsFolderExecute(Sender: TObject);
     procedure CheckBoxSaveToFileChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -74,9 +82,9 @@ const
 var
    HistoryFile : THandle;
 begin
-  If Not DirectoryExists(MainDataModule.GetReportsFolderRelativePath) then
-    If Not CreateDir (MainDataModule.GetReportsFolderRelativePath) Then
-      MessageDlg('Informação', 'Não foi possível Criar a pasta de Relatórios', mtError, [mbOK], 0);
+  If Not DirectoryExists(MainDataModule.GetExtractedBaseFolderRelativePath) then
+    If Not CreateDir (MainDataModule.GetExtractedBaseFolderRelativePath) Then
+      MessageDlg('Informação', 'Não foi possível Criar a pasta de Base Extraída', mtError, [mbOK], 0);
 
   If Not FileExists(MainDataModule.HISTORY_FILE_NAME) then
     begin
@@ -101,6 +109,17 @@ begin
       MainDataModule.ExecuteQuery(Query);
 end;
 
+procedure TApplicationMainForm.ActionExtractDatabaseExecute(Sender: TObject);
+begin
+  MainDataModule.ExtractDatabase;
+end;
+
+procedure TApplicationMainForm.ActionOpenExtractedBaseFolderExecute(
+  Sender: TObject);
+begin
+  OpenDocument(MainDataModule.GetExtractedBaseFolderFullPath);
+end;
+
 procedure TApplicationMainForm.ActionOpenReportsFolderExecute(Sender: TObject);
 begin
   OpenDocument(MainDataModule.GetReportsFolderFullPath);
@@ -116,6 +135,13 @@ const
   LICENCE : String = 'Licença:';
 begin
   MessageDlg(MainDataModule.MESSAGE_TITLE, 'Desenvolvolvimento: Gedean Dias (gedean.dias@akapu.com.br)', mtInformation, [mbOK], 0);
+end;
+
+procedure TApplicationMainForm.ActionEditorTestsExecute(Sender: TObject);
+begin
+  MainDataModule.SQLQueryListTable.Open;
+
+  MessageDlg(MainDataModule.MESSAGE_TITLE, MainDataModule.SQLQueryListTable.Fields[0].ToString, mtInformation, [mbOK], 0);
 end;
 
 

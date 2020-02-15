@@ -35,7 +35,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="3">
+    <Units Count="4">
       <Unit0>
         <Filename Value="extrator_dados.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -55,6 +55,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="..\source\rest_api\datamodule\rest_api_datamodule.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="RestApiDataModule"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -65,7 +72,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="..\source\main\form;..\source\main\data_module"/>
+      <OtherUnitFiles Value="..\source\main\form;..\source\main\data_module;..\source\rest_api\datamodule"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <CodeGeneration>

@@ -1,0 +1,9 @@
+object RestApiDataModule: TRestApiDataModule
+  OnCreate = DataModuleCreate
+  OldCreateOrder = False
+  Height = 225
+  HorizontalOffset = 759
+  VerticalOffset = 248
+  Width = 270
+  PPI = 144
+end

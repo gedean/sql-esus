@@ -1,7 +1,7 @@
 object ApplicationMainForm: TApplicationMainForm
-  Left = 136
+  Left = 205
   Height = 539
-  Top = 320
+  Top = 238
   Width = 1231
   Caption = 'Extrator de Dados'
   ClientHeight = 509
@@ -930,10 +930,20 @@ object ApplicationMainForm: TApplicationMainForm
     end
     object ActionEditorTests: TAction
       Caption = 'ActionEditorTests'
+      OnExecute = ActionEditorTestsExecute
+      ShortCut = 16507
     end
     object ActionOpenReportsFolder: TAction
       Caption = 'Abrir Pasta de Relatórios'
       OnExecute = ActionOpenReportsFolderExecute
+    end
+    object ActionOpenExtractedBaseFolder: TAction
+      Caption = 'Abir Pasta de Base Extraída'
+      OnExecute = ActionOpenExtractedBaseFolderExecute
+    end
+    object ActionExtractDatabase: TAction
+      Caption = 'Extrair Base de Dados'
+      OnExecute = ActionExtractDatabaseExecute
     end
   end
   object MainMenu: TMainMenu
@@ -948,6 +958,15 @@ object ApplicationMainForm: TApplicationMainForm
         Action = ActionOpenReportsFolder
       end
     end
+    object MenuItem2: TMenuItem
+      Caption = 'Extração de Base de Dados'
+      object MenuItem4: TMenuItem
+        Action = ActionExtractDatabase
+      end
+      object MenuItem3: TMenuItem
+        Action = ActionOpenExtractedBaseFolder
+      end
+    end
     object MenuItemSetup: TMenuItem
       Caption = 'Configurações'
     end
@@ -959,7 +978,7 @@ object ApplicationMainForm: TApplicationMainForm
     DefaultFilter = 'Arquivos SQL (*.sql)|*.sql'
     Enabled = False
     SQLDialect = sqlPostgres
-    left = 1088
-    top = 136
+    left = 296
+    top = 144
   end
 end

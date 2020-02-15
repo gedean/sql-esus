@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, MainForm, main_datamodule;
+  Forms, MainForm, main_datamodule, rest_api_datamodule;
 
 begin
   RequireDerivedFormResource:=True;
@@ -15,6 +15,7 @@ begin
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainDataModule, MainDataModule);
+  Application.CreateForm(TRestApiDataModule, RestApiDataModule);
   Application.CreateForm(TApplicationMainForm, ApplicationMainForm);
   Application.Run;
 end.
