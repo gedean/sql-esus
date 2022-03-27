@@ -16,7 +16,7 @@ type
   private
 
   public
-
+    procedure Test;
   end;
 
 var
@@ -29,6 +29,11 @@ implementation
 { TRestApiDataModule }
 
 procedure TRestApiDataModule.DataModuleCreate(Sender: TObject);
+begin
+
+end;
+
+procedure TRestApiDataModule.Test;
 begin
 
 end;

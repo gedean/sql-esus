@@ -111,9 +111,9 @@ end;
 
 procedure TApplicationMainForm.ActionExtractDatabaseExecute(Sender: TObject);
 begin
-  MainDataModule.ExtractDatabase;
-end;
 
+end;
+156
 procedure TApplicationMainForm.ActionOpenExtractedBaseFolderExecute(
   Sender: TObject);
 begin
